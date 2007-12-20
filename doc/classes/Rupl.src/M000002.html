@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>compute_distance (Rupl)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File rupl.rb, line 40</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compute_distance</span>(<span class="ruby-identifier">first</span>,<span class="ruby-identifier">second</span>)
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">first</span>[<span class="ruby-identifier">:latitude</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">second</span>[<span class="ruby-identifier">:latitude</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">first</span>[<span class="ruby-identifier">:longitude</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">second</span>[<span class="ruby-identifier">:longitude</span>].<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">lat1</span> = <span class="ruby-identifier">nmea2degree_decimal</span>(<span class="ruby-identifier">first</span>[<span class="ruby-identifier">:latitude</span>],<span class="ruby-identifier">first</span>[<span class="ruby-identifier">:latitude_ns</span>])<span class="ruby-operator">/</span><span class="ruby-constant">RADIAN_CONVERSION_FACTOR</span>
+      <span class="ruby-identifier">lat2</span> = <span class="ruby-identifier">nmea2degree_decimal</span>(<span class="ruby-identifier">second</span>[<span class="ruby-identifier">:latitude</span>],<span class="ruby-identifier">second</span>[<span class="ruby-identifier">:latitude_ns</span>])<span class="ruby-operator">/</span><span class="ruby-constant">RADIAN_CONVERSION_FACTOR</span>
+      <span class="ruby-identifier">lng1</span> = <span class="ruby-identifier">nmea2degree_decimal</span>(<span class="ruby-identifier">first</span>[<span class="ruby-identifier">:longitude</span>],<span class="ruby-identifier">first</span>[<span class="ruby-identifier">:longitude_ew</span>])<span class="ruby-operator">/</span><span class="ruby-constant">RADIAN_CONVERSION_FACTOR</span>
+      <span class="ruby-identifier">lng2</span> = <span class="ruby-identifier">nmea2degree_decimal</span>(<span class="ruby-identifier">second</span>[<span class="ruby-identifier">:longitude</span>],<span class="ruby-identifier">second</span>[<span class="ruby-identifier">:longitude_ew</span>])<span class="ruby-operator">/</span><span class="ruby-constant">RADIAN_CONVERSION_FACTOR</span>
+      <span class="ruby-identifier">d</span> = <span class="ruby-value">2</span><span class="ruby-operator">*</span><span class="ruby-constant">Math</span>.<span class="ruby-identifier">asin</span>(<span class="ruby-constant">Math</span>.<span class="ruby-identifier">sqrt</span>((<span class="ruby-constant">Math</span>.<span class="ruby-identifier">sin</span>((<span class="ruby-identifier">lat1</span><span class="ruby-operator">-</span><span class="ruby-identifier">lat2</span>)<span class="ruby-operator">/</span><span class="ruby-value">2</span>))<span class="ruby-operator">**</span><span class="ruby-value">2</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">cos</span>(<span class="ruby-identifier">lat1</span>)<span class="ruby-operator">*</span><span class="ruby-constant">Math</span>.<span class="ruby-identifier">cos</span>(<span class="ruby-identifier">lat2</span>)<span class="ruby-operator">*</span>(<span class="ruby-constant">Math</span>.<span class="ruby-identifier">sin</span>((<span class="ruby-identifier">lng1</span><span class="ruby-operator">-</span><span class="ruby-identifier">lng2</span>)<span class="ruby-operator">/</span><span class="ruby-value">2</span>))<span class="ruby-operator">**</span><span class="ruby-value">2</span>))
+      <span class="ruby-comment cmt"># convert to meters and return</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">d</span><span class="ruby-operator">*</span><span class="ruby-constant">RADIAN_CONVERSION_FACTOR</span><span class="ruby-operator">*</span><span class="ruby-value">60.0</span><span class="ruby-operator">*</span><span class="ruby-value">1852</span>;
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

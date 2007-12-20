@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Rupl</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Rupl</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/rupl_rb.html">
+                rupl.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="Rupl.html">Rupl</a></h1>
+<p>
+Copyright (c) 2007 Jonathan S. Garvin (<a
+href="http://www.5valleys.com">www.5valleys.com</a>)
+</p>
+<p>
+See included <b>README</b> file description and for license information.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000003">compute_direction</a>&nbsp;&nbsp;
+      <a href="#M000002">compute_distance</a>&nbsp;&nbsp;
+      <a href="#M000005">degrees2intercardinal</a>&nbsp;&nbsp;
+      <a href="#M000001">last_known_location</a>&nbsp;&nbsp;
+      <a href="#M000004">nmea2degree_decimal</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="Rupl/Trigger.html" class="link">Rupl::Trigger</a><br />
+
+    </div>
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">RADIAN_CONVERSION_FACTOR</td>
+          <td>=</td>
+          <td class="context-item-value">180/Math::PI</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="Rupl.src/M000003.html" target="Code" class="method-signature"
+            onclick="popupCode('Rupl.src/M000003.html');return false;">
+          <span class="method-name">compute_direction</span><span class="method-args">(first,second)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Takes two hashes of NMEA formatted coordinates and returns the direction in
+degrees the second is in relation to the first.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="Rupl.src/M000002.html" target="Code" class="method-signature"
+            onclick="popupCode('Rupl.src/M000002.html');return false;">
+          <span class="method-name">compute_distance</span><span class="method-args">(first,second)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Takes two hashes of NMEA formatted coordinates and returns the distance in
+meters between the two. Each hash must contain the following fields.
+</p>
+<table>
+<tr><td valign="top">latitude:</td><td>the latitude. eg &#8216;4611.2222&#8217; for 46 degrees 11.2222 minutes
+
+</td></tr>
+<tr><td valign="top">latitude_ns:</td><td>the latitude hemisphere. eg &#8216;N&#8216;
+
+</td></tr>
+<tr><td valign="top">longitude:</td><td>the longitude. eg &#8216;08511.2222&#8217; for 85 degrees 11.2222 minutes
+
+</td></tr>
+<tr><td valign="top">longitude_ew:</td><td>the longitude hemisphere. eg &#8216;W&#8216;
+
+</td></tr>
+</table>
+<h4>sample</h4>
+<pre>
+  Rupl.compute_distance(
+     {:latitude =&gt; '4612.3456',:latitude_ns =&gt; 'N', :longitude =&gt; '11345.321', :longitude_ew =&gt; 'W'},
+     {:latitude =&gt; '4523.7890',:latitude_ns =&gt; 'N', :longitude =&gt; '11342.987', :longitude_ew =&gt; 'W'}
+  ) =&gt; 89977.2970247057
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="Rupl.src/M000005.html" target="Code" class="method-signature"
+            onclick="popupCode('Rupl.src/M000005.html');return false;">
+          <span class="method-name">degrees2intercardinal</span><span class="method-args">(degrees)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+converts degrees to intercardinal directions
+</p>
+<pre>
+  Rupl.degrees2intercardinal(42) =&gt; 'NE'
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="Rupl.src/M000001.html" target="Code" class="method-signature"
+            onclick="popupCode('Rupl.src/M000001.html');return false;">
+          <span class="method-name">last_known_location</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a hash of data for the last valid reading from the GPS receiver.
+Contains the following fields.
+</p>
+<table>
+<tr><td valign="top">latitude:</td><td>the NMEA formatted latitude. eg. &#8216;4611.2222&#8216;
+
+</td></tr>
+<tr><td valign="top">latitude_ns:</td><td>the hemisphere of the latitude. eg &#8216;N&#8216;
+
+</td></tr>
+<tr><td valign="top">longitude:</td><td>the NMEA formatted longitude. eg &#8216;08522.3333&#8216;
+
+</td></tr>
+<tr><td valign="top">longitude_ew:</td><td>the hemisphere of the longitude. eg &#8216;W&#8216;
+
+</td></tr>
+<tr><td valign="top">satellite_count:</td><td>number of sattelites locked onto at time of reading
+
+</td></tr>
+<tr><td valign="top">hdop:</td><td>horizontal dilution of position
+
+</td></tr>
+<tr><td valign="top">altitude:</td><td>altitude
+
+</td></tr>
+<tr><td valign="top">altitude_units:</td><td>altitude units
+
+</td></tr>
+<tr><td valign="top">signal_utc_time:</td><td>UTC time read from satelite signal
+
+</td></tr>
+<tr><td valign="top">local_time:</td><td>what Time.now returned at reading
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="Rupl.src/M000004.html" target="Code" class="method-signature"
+            onclick="popupCode('Rupl.src/M000004.html');return false;">
+          <span class="method-name">nmea2degree_decimal</span><span class="method-args">(numeric,direction)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Converts an NMEA formatted degree/hemisphere pair into a float.
+</p>
+<pre>
+  nmea2degree_decimal('4630.000','S') =&gt; -46.5
+</pre>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
