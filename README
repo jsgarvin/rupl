@@ -2,14 +2,15 @@
 # Copyright (c) 2007 Jonathan S. Garvin (http://www.5valleys.com)
 #
 # == Description
-# Rupl is a ruby libarary written for the Nokia N810 Internet Tablet for
-# the purpose of providing a convienent method for Ruby applications to
+# Rupl is a ruby libarary written for the GPS Enabled devices running
+# the Maemo operating system for the purpose of providing a convienent
+# method for Ruby applications to
 # * use the built in GPS receiver to retrieve location data
 # * trigger events based on movement or proximity to user defined
 #   locations
 # * provide common convenience functions for GPS related measurements
 #   and calculations.
 #
-# Rupl has not (yet) been tested on the Nokia N900 phone. The goal however
-# is for Rupl to run on any GPS enabled device running the Maemo operating
-# system.
+# Rupl has only been tested on the Nokia N810 Internet Tablet. The goal
+# however is for Rupl to run on any GPS enabled device running the Maemo
+# operating system, including the N900 phone.
