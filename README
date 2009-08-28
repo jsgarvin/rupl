@@ -9,3 +9,7 @@
 #   locations
 # * provide common convenience functions for GPS related measurements
 #   and calculations.
+#
+# Rupl has not (yet) been tested on the Nokia N900 phone. The goal however
+# is for Rupl to run on any GPS enabled device running the Maemo operating
+# system.
